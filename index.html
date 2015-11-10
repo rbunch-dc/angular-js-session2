@@ -12,10 +12,14 @@
 </head>
 <body ng-controller="myController">
 
+<div id="filter">
+	<input ng-model="filterSearch" type="text">
+</div>
+
 <div class="container">
 	<div class="row">
 		<ul>
-			<li ng-repeat="person in students">
+			<li ng-repeat="person in students | filter:filterSearch | orderBy:'name'">
 				<span class="col-md-6">{{person.name}}: {{person.desc}}</span>
 				<a class="col-md-6 btn btn-danger btn-sm" href="#" ng-click="removeStudent(person)">Remove</a>
 			</li>
