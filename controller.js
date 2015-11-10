@@ -1,7 +1,14 @@
 angular.module('myApp', []).controller('myController', function($scope){
 
 	$scope.addPerson = function(){
-		$scope.students.push({name: $scope.newName,desc: $scope.newDesc});
+		$scope.students.push(
+			{
+				name: $scope.newName,
+				desc: $scope.newDesc
+			}
+		);
+		$scope.newName = "";
+		$scope.newDesc = "";
 	}
 
 	$scope.students = [
