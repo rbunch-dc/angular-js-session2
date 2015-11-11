@@ -6,33 +6,41 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="styles.css">
 
+	<style>
+		td{
+			padding: 20px;
+		}
+		input{
+			margin: 10px;
+		}
+	</style>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 	<script type="text/javascript" src="controller.js"></script>
 
 </head>
 <body ng-controller="myController">
 
-<div id="filter">
-	<input ng-model="filterSearch" type="text">
-</div>
 
 <div class="container">
 	<div class="row">
-		<ul>
-			<li ng-repeat="person in students | filter:filterSearch | orderBy:'-name'">
-				<span class="col-md-6">{{person.name}}: {{person.desc}}</span>
-				<a class="col-md-6 btn btn-danger btn-sm" href="#" ng-click="removeStudent(person)">Remove</a>
-			</li>
-		</ul>
+
+	Search:<input ng-model="query" type="text">
+	<table border=1>
+		<tr>
+			<th><a href="" ng-click="sortField = 'name'; reverse = !reverse">Name</a></th>
+			<th><a href="" ng-click="sortField = 'desc'; reverse = !reverse">Description</a></th>
+			<th><a href="" ng-click="sortField = 'luckyNumber'; reverse = !reverse">Lucky Number</a></th>
+
+		</tr>
+		<tr ng-repeat="student in students | filter:query | orderBy:sortField:reverse">
+			<td>{{student.name}}</td>
+			<td>{{student.desc}}</td>
+			<td>{{student.luckyNumber}}</td>
+		</tr>
+	</table>
 	</div>
-
 </div>
-
-	<form ng-submit="addPerson()">
-		<input type="text" ng-model="newName" placeholder="Name">
-		<input type="text" ng-model="newDesc" placeholder="Description">
-		<input type="submit">
-	</form>
 
 </body>
 </html>
